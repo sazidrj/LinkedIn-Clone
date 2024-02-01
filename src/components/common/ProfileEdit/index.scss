@@ -6,6 +6,11 @@ $linkedinBlue3: #004c75;
     display:grid;
     margin-top: 40px;
     gap: 20px;
+
+    label{
+        font-family: system-ui;
+        
+    }
 }
 
 
@@ -27,4 +32,9 @@ $linkedinBlue3: #004c75;
     color: #ffffff;
     font-size: 18px;
     margin-top: 20px;
+}
+
+
+.close-icon{
+    cursor: pointer;
 }

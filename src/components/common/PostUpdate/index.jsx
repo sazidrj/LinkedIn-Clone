@@ -16,14 +16,15 @@ export default function PostStatus({ currentUser }) {
     let object = {
       status: status,
       timeStamp: getCurrentTimeStamp("LLL"),
-      userEmail: userEmail,
+      userEmail: currentUser.email,
       userName: currentUser.name,
       postID: getUniqueID(),
+      userID: currentUser.id,
     };
 
-    {
-      console.log(currentUser);
-    }
+    // {
+    //   console.log(currentUser);
+    // }
 
     await postStatus(object);
     await setModalOpen(false);

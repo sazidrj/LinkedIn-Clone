@@ -13,8 +13,9 @@ import { BsBriefcase } from "react-icons/bs";
 import ProfilePopup from "../ProfilePopup";
 import "./index.scss";
 
-export default function Topbar() {
+export default function Topbar({ currentUser }) {
   const [popupVisible, setPopupVisible] = useState(false);
+  const [users, setUsers] = useState(false);
   let navigate = useNavigate();
 
   const goToRoute = (route) => {
@@ -22,6 +23,15 @@ export default function Topbar() {
   };
   const displayPopup = () => {
     setPopupVisible(!popupVisible);
+  };
+
+  const openUser = (user) => {
+    navigate("/profile", {
+      state: {
+        id: user.id,
+        email: user.email,
+      },
+    });
   };
 
   return (

@@ -7,7 +7,15 @@ export default function PostsCard({ posts }) {
 
   return (
     <div className="posts-card">
-      <p className="name" onClick={() => navigate("./profile")}>
+      {/* {console.log("posts", posts)} */}
+      <p
+        className="name"
+        onClick={() =>
+          navigate("/profile", {
+            state: { id: posts?.userID, email: posts.userEmail },
+          })
+        }
+      >
         {posts.userName}
       </p>
       <p className="timestamp">{posts.timeStamp}</p>
