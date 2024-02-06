@@ -57,7 +57,17 @@ export default function PostStatus({ currentUser }) {
 
   return (
     <div className="post-status-main">
+      <div className="user-details">
+        <img alt="imageLink" src={currentUser.imageLink} />
+        <p className="name">{currentUser.name}</p>
+        <p className="heading">{currentUser.headline}</p>
+      </div>
       <div className="post-status">
+        <img
+          className="post-image"
+          alt="imageLink"
+          src={currentUser.imageLink}
+        />
         <button
           className="open-post-modal"
           onClick={() => {
