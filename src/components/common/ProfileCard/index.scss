@@ -14,9 +14,11 @@
         .profile-image{
             width: 200px;
             height: 200px;
+            object-fit: contain;
             border-radius: 50%;
             border: 2px solid #cacaca;
             padding: 5px;
+            cursor: pointer;
 
         }
 

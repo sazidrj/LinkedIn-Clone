@@ -18,9 +18,7 @@ export default function ProfilePopup() {
       <p className="headline">{currentUser?.headline}</p>
       <Button
         title="View Profile"
-        onClick={() =>
-          navigate("/profile", { state: { id: currentUser?.userID } })
-        }
+        onClick={() => navigate("/profile", { state: { id: currentUser?.id } })}
       />
       <Button title="Log out" onClick={onLogout} />
     </div>
