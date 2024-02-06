@@ -33,9 +33,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
     );
   };
 
-  {
-    console.log("location", location);
-  }
   useMemo(() => {
     if (location?.state?.id) {
       getSingleStatus(setAllStatus, location?.state?.id);
@@ -124,7 +121,6 @@ export default function ProfileCard({ onEdit, currentUser }) {
       </div>
 
       <div className="post-status-main">
-        {console.log("profile post", allStatuses)}
         {allStatuses?.map((posts) => {
           return (
             <div key={posts.id}>

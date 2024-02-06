@@ -1,10 +1,15 @@
 import React, { useMemo, useState } from "react";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
-import { getAllUsers, getCurrentUser } from "../../../api/FirestoreAPI";
+import {
+  getAllUsers,
+  getCurrentUser,
+  deletePost,
+} from "../../../api/FirestoreAPI";
 import LikeButton from "../LikeButton";
+import { BsPencil, BsTrash } from "react-icons/bs";
 
-export default function PostsCard({ posts, id }) {
+export default function PostsCard({ posts, id, getEditData }) {
   let navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
@@ -14,11 +19,25 @@ export default function PostsCard({ posts, id }) {
     getAllUsers(setAllUsers);
   }, []);
 
-  console.log(currentUser);
-
   return (
     <div className="posts-card" key={id}>
       <div className="post-image-wrapper">
+        {currentUser.id === posts.userID ? (
+          <div className="action-container">
+            <BsPencil
+              size={20}
+              className="action-icon"
+              onClick={() => getEditData(posts)}
+            />
+            <BsTrash
+              size={20}
+              className="action-icon"
+              onClick={() => deletePost(posts.id)}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
         <img
           alt="profile-image"
           className="post-image"
