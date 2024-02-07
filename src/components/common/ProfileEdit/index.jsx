@@ -21,6 +21,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
       <div className="edit-btn">
         <AiOutlineClose className="close-icon" onClick={onEdit} size={25} />
       </div>
+
       <div className="profile-edit-inputs">
         <label>Name</label>
         <input
@@ -35,8 +36,8 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           onChange={getInput}
           className="common-input"
           placeholder="Headline"
-          name="headline"
           value={editInputs.headline}
+          name="headline"
         />
         <label>Country</label>
         <input
@@ -51,7 +52,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           onChange={getInput}
           className="common-input"
           placeholder="City"
-          name="City"
+          name="city"
           value={editInputs.city}
         />
         <label>Company</label>
@@ -59,10 +60,10 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           onChange={getInput}
           className="common-input"
           placeholder="Company"
-          name="company"
           value={editInputs.company}
+          name="company"
         />
-        <label>Industry</label>
+        <label>Industry </label>
         <input
           onChange={getInput}
           className="common-input"
@@ -78,7 +79,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           name="college"
           value={editInputs.college}
         />
-        <label>Webiste</label>
+        <label>Website</label>
         <input
           onChange={getInput}
           className="common-input"
@@ -91,7 +92,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
           placeholder="About Me"
           className="common-textArea"
           onChange={getInput}
-          rows={4}
+          rows={5}
           name="aboutMe"
           value={editInputs.aboutMe}
         />
@@ -99,7 +100,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
         <input
           onChange={getInput}
           className="common-input"
-          placeholder="Skills"
+          placeholder="Skill"
           name="skills"
           value={editInputs.skills}
         />

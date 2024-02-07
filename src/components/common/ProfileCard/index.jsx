@@ -1,15 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import "./index.scss";
+import React, { useState, useMemo } from "react";
+import { getSingleStatus, getSingleUser } from "../../../api/FirestoreAPI";
 import PostsCard from "../PostsCard";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 import FileUploadModal from "../FileUploadModal";
 import { uploadImage as uploadImageAPI } from "../../../api/ImageUpload";
-import {
-  getSingleStatus,
-  getSingleUser,
-  editProfile,
-} from "../../../api/FirestoreAPI";
+import "./index.scss";
 
 export default function ProfileCard({ onEdit, currentUser }) {
   let location = useLocation();
@@ -18,11 +14,10 @@ export default function ProfileCard({ onEdit, currentUser }) {
   const [currentImage, setCurrentImage] = useState({});
   const [progress, setProgress] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-
   const getImage = (event) => {
     setCurrentImage(event.target.files[0]);
   };
-
+  console.log(currentProfile);
   const uploadImage = () => {
     uploadImageAPI(
       currentImage,
@@ -54,9 +49,13 @@ export default function ProfileCard({ onEdit, currentUser }) {
         progress={progress}
       />
       <div className="profile-card">
-        <div className="edit-btn">
-          <HiOutlinePencil className="edit-icon" onClick={onEdit} />
-        </div>
+        {currentUser.id === location?.state?.id ? (
+          <div className="edit-btn">
+            <HiOutlinePencil className="edit-icon" onClick={onEdit} />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="profile-info">
           <div>
             <img
@@ -79,28 +78,46 @@ export default function ProfileCard({ onEdit, currentUser }) {
                 ? currentUser.headline
                 : currentProfile?.headline}
             </p>
-            <p className="location">
-              {Object.values(currentProfile).length === 0
-                ? `${currentUser.City}, ${currentUser.country}`
-                : `${currentProfile?.City}, ${currentProfile?.country}`}
-            </p>
-            <a
-              className="website"
-              target="_blank"
-              href={
-                Object.values(currentProfile).length === 0
+            {(currentUser.city || currentUser.country) &&
+            (currentProfile?.city || currentProfile?.country) ? (
+              <p className="location">
+                {Object.values(currentProfile).length === 0
+                  ? `${currentUser.city}, ${currentUser.country} `
+                  : `${currentProfile?.city}, ${currentUser.country}`}
+              </p>
+            ) : (
+              <></>
+            )}
+            {currentUser.website || currentProfile?.website ? (
+              <a
+                className="website"
+                target="_blank"
+                href={
+                  Object.values(currentProfile).length === 0
+                    ? `${currentUser.website}`
+                    : currentProfile?.website
+                }
+              >
+                {Object.values(currentProfile).length === 0
                   ? `${currentUser.website}`
-                  : currentProfile?.website
-              }
-            >
-              {Object.values(currentProfile).length === 0
-                ? `${currentUser.website}`
-                : currentProfile?.website}
-            </a>
+                  : currentProfile?.website}
+              </a>
+            ) : (
+              <></>
+            )}
           </div>
+
           <div className="right-info">
-            <p className="collge">{currentUser.college}</p>
-            <p className="company">{currentUser.company}</p>
+            <p className="college">
+              {Object.values(currentProfile).length === 0
+                ? currentUser.college
+                : currentProfile?.college}
+            </p>
+            <p className="company">
+              {Object.values(currentProfile).length === 0
+                ? currentUser.company
+                : currentProfile?.company}
+            </p>
           </div>
         </div>
         <p className="about-me">
@@ -108,6 +125,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             ? currentUser.aboutMe
             : currentProfile?.aboutMe}
         </p>
+
         {currentUser.skills || currentProfile?.skills ? (
           <p className="skills">
             <span className="skill-label">Skills</span>:&nbsp;
